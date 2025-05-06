@@ -13,7 +13,7 @@ class FirstRoute extends StatelessWidget {
       appBar: AppBar(title: const Text('Login')),
       body: Center(
         child: ElevatedButton(
-          child: const Text('Primeiro'),
+          child: const Text('Entrar'),
           onPressed: () {
             Navigator.push(
               context,
@@ -33,9 +33,20 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Tela principal'), 
-          automaticallyImplyLeading: false
+        title: const Text('Tela principal'),
+        automaticallyImplyLeading: false, // Desativa o botão "voltar"
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          tooltip: 'Logout',
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const FirstRoute()),
+              (Route<dynamic> route) => false,
+            );
+          },
         ),
+      ),
       body: Center(
         child: ElevatedButton(
           child: const Text('Cadastrar'),
@@ -59,9 +70,9 @@ class ThirdRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Cadastro'),
-          automaticallyImplyLeading: false 
-        ),
+        title: const Text('Cadastro'),
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: ElevatedButton(
           child: const Text('Salvar'),
@@ -77,7 +88,6 @@ class ThirdRoute extends StatelessWidget {
   }
 }
 
-
 class FourthRoute extends StatelessWidget {
   const FourthRoute({super.key});
 
@@ -85,21 +95,20 @@ class FourthRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('FIM'),
-          automaticallyImplyLeading: false 
-        ),
+        title: const Text('FIM'),
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => FirstRoute()),
+              MaterialPageRoute(builder: (context) => const SecondRoute()),
               (Route<dynamic> route) => false,
             );
           },
-          child: const Text('Voltar ao inicio'),
+          child: const Text('Voltar ao início'),
         ),
-        
       ),
     );
   }
