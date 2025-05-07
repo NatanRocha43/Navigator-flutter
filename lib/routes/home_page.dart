@@ -1,40 +1,57 @@
 import 'package:flutter/material.dart';
 import 'cadastro_page.dart';
-import 'login_page.dart';
 
-class SecondRoute extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final String user;
 
-  const SecondRoute({required this.user, super.key});
+  const HomePage({required this.user, super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<String> items = [];
+
+  void _addItem(String newItem) {
+    setState(() {
+      items.add(newItem);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bem-vindo, $user'),
+        title: Text('Bem-vindo, ${widget.user}'),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(Icons.logout),
           tooltip: 'Logout',
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const FirstRoute()),
-              (Route<dynamic> route) => false,
-            );
+            Navigator.pop(context);
           },
         ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Cadastrar'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ThirdRoute(user: user)),
-            );
-          },
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Text(items[index]),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => CadastroPage(
+                user: widget.user,
+                onAddItem: _addItem,
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

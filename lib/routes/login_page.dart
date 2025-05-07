@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 
-class FirstRoute extends StatefulWidget {
-  const FirstRoute({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<FirstRoute> createState() => _FirstRouteState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _FirstRouteState extends State<FirstRoute> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _userController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -19,7 +19,8 @@ class _FirstRouteState extends State<FirstRoute> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SecondRoute(user: username),
+          settings: const RouteSettings(name: '/home'),
+          builder: (context) => HomePage(user: username),
         ),
       );
     }

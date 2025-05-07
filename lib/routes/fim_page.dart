@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
 
-class FourthRoute extends StatelessWidget {
+class FimPage extends StatelessWidget {
   final String user;
 
-  const FourthRoute({required this.user, super.key});
+  const FimPage({required this.user, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FIM'),
-        automaticallyImplyLeading: false,
-      ),
+      appBar: AppBar(title: const Text('Sucesso'), automaticallyImplyLeading: false),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => SecondRoute(user: user)),
-              (Route<dynamic> route) => false,
-            );
+            Navigator.popUntil(context, (route) => route.settings.name == '/home');
           },
           child: const Text('Voltar para Home'),
         ),
